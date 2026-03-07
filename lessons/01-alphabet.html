@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1: The Alphabet — Sureth Scholars</title>
+  <meta name="description" content="Learn the 22 letters of the Assyrian Sureth alphabet, their names, and how they sound.">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* --- Filter bar --- */
+    .filter-bar {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-right: 8px;
+    }
+
+    .filter-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 5px 14px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.18s;
+      letter-spacing: 0.04em;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .search-wrap {
+      margin-left: auto;
+      position: relative;
+    }
+
+    .search-wrap input {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      padding: 6px 14px 6px 32px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: white;
+      color: var(--text);
+      outline: none;
+      width: 180px;
+      transition: border-color 0.18s;
+    }
+
+    .search-wrap input:focus { border-color: var(--accent); }
+    .search-wrap input::placeholder { color: var(--muted); }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 13px;
+      pointer-events: none;
+    }
+
+    /* --- Alphabet grid --- */
+    .alphabet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .letter-card {
+      background: var(--surface);
+      padding: 28px 24px 22px;
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .letter-card:hover {
+      background: var(--accent-light);
+      z-index: 1;
+    }
+
+    .letter-card.hidden { display: none; }
+
+    .card-number {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .card-script {
+      font-family: var(--font-syriac);
+      font-size: 2.8rem;
+      color: var(--script);
+      direction: rtl;
+      line-height: 1.1;
+      display: block;
+      margin-bottom: 14px;
+      transition: color 0.15s;
+    }
+
+    .letter-card:hover .card-script { color: var(--accent); }
+
+    .card-name {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .card-transliteration {
+      font-size: 0.82rem;
+      font-family: 'Courier New', monospace;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      background: var(--accent-light);
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+
+    .card-sound {
+      font-size: 0.83rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 2px;
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    /* --- Vowels --- */
+    .vowels-section {
+      margin-top: 56px;
+    }
+
+    .vowel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .vowel-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 18px 20px;
+    }
+
+    .vowel-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .vowel-sound {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      margin-bottom: 6px;
+    }
+
+    .vowel-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* --- Detail modal --- */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 23, 20, 0.55);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--surface);
+      width: 90%;
+      max-width: 440px;
+      border: 1px solid var(--border);
+      padding: 48px;
+      position: relative;
+      animation: fadeUp 0.22s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    .modal-close:hover { color: var(--text); }
+
+    .modal-num {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .modal-script {
+      font-family: var(--font-syriac);
+      font-size: 5rem;
+      color: var(--accent);
+      direction: rtl;
+      display: block;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .modal-name {
+      font-size: 1.8rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .modal-translit {
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      color: var(--accent);
+      background: var(--accent-light);
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 3px;
+      margin-bottom: 18px;
+    }
+
+    .modal-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 18px 0;
+    }
+
+    .modal-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .modal-row-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      min-width: 90px;
+      padding-top: 2px;
+    }
+
+    .modal-row-val {
+      font-size: 0.95rem;
+      color: var(--text);
+      flex: 1;
+    }
+
+    /* --- Lesson nav --- */
+    .lesson-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .lesson-nav .disabled {
+      color: var(--muted);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* --- Responsive additions --- */
+    @media (max-width: 640px) {
+      .filter-bar {
+        padding-left: 24px;
+        padding-right: 24px;
+        flex-wrap: wrap;
+      }
+      .search-wrap {
+        margin-left: 0;
+        width: 100%;
+      }
+      .search-wrap input { width: 100%; }
+      .alphabet-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../index.html" class="nav-brand">
+      Sureth Scholars
+      <span class="syriac">ܣܘܼܪܲܝܬ</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="01-alphabet.html" class="active">Lessons</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <p class="eyebrow">Lesson 01</p>
+    <h1>The Alphabet</h1>
+    <span class="syriac-title">ܐܲܠܲܦ ܒܹܝܬ ܣܘܼܪܲܝܬ</span>
+    <p>22 consonantal letters of the Syriac-Aramaic script, written right to left. Vowels are expressed through diacritical marks called <em>Zow'e</em>.</p>
+  </section>
+
+  <div class="stats">
+    <div class="stat-item"><span class="stat-num">22</span><span class="stat-label">Consonants</span></div>
+    <div class="stat-item"><span class="stat-num">7</span><span class="stat-label">Vowels (Zow'e)</span></div>
+    <div class="stat-item"><span class="stat-num">RTL</span><span class="stat-label">Direction</span></div>
+    <div class="stat-item"><span class="stat-num">~800 BC</span><span class="stat-label">Origin</span></div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="guttural">Guttural</button>
+    <button class="filter-btn" data-filter="variant">Has Variant</button>
+    <div class="search-wrap">
+      <span class="search-icon">&#x2315;</span>
+      <input type="text" id="search" placeholder="Search letters..." />
+    </div>
+  </div>
+
+  <section class="section">
+    <p class="section-title">Consonants &mdash; Atwat'e &nbsp;(ܐܬܘܬܐ)</p>
+    <div class="alphabet-grid" id="grid"></div>
+
+    <div class="vowels-section">
+      <p class="section-title">Vowels &mdash; Zow'e &nbsp;(ܙܘܥܐ)</p>
+      <div class="vowel-grid">
+        <div class="vowel-card"><div class="vowel-name">Zqapa</div><div class="vowel-sound">"AA"</div><div class="vowel-desc">As in "c<em>a</em>r" &mdash; two diagonal dots above</div></div>
+        <div class="vowel-card"><div class="vowel-name">Pthakha</div><div class="vowel-sound">"UH"</div><div class="vowel-desc">As in "v<em>e</em>rb" &mdash; dot above and below</div></div>
+        <div class="vowel-card"><div class="vowel-name">Zlama Psheeqa</div><div class="vowel-sound">"IH"</div><div class="vowel-desc">As in "s<em>i</em>t" &mdash; two horizontal dots below</div></div>
+        <div class="vowel-card"><div class="vowel-name">Zlama Qashya</div><div class="vowel-sound">"EH"</div><div class="vowel-desc">As in "b<em>e</em>d" &mdash; two angled dots below</div></div>
+        <div class="vowel-card"><div class="vowel-name">Rwakha</div><div class="vowel-sound">"OH"</div><div class="vowel-desc">As in "ph<em>o</em>ne" &mdash; dot above Waw</div></div>
+        <div class="vowel-card"><div class="vowel-name">Rwasa</div><div class="vowel-sound">"OO"</div><div class="vowel-desc">As in "m<em>oo</em>n" &mdash; dot below Waw</div></div>
+        <div class="vowel-card"><div class="vowel-name">Khwasa</div><div class="vowel-sound">"EE"</div><div class="vowel-desc">As in "b<em>ee</em>" &mdash; dot below Yodh</div></div>
+      </div>
+    </div>
+
+    <div class="lesson-nav">
+      <span class="disabled">&larr; Previous</span>
+      <span class="disabled">Next: Vowels &amp; Diacritics &rarr;</span>
+    </div>
+  </section>
+
+  <footer class="footer">
+    Sureth Scholars &mdash; Preserving and teaching Assyrian Sureth (Neo-Aramaic)
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">&#x2715;</button>
+      <div class="modal-num" id="m-num"></div>
+      <span class="modal-script" id="m-script"></span>
+      <div class="modal-name" id="m-name"></div>
+      <div class="modal-translit" id="m-translit"></div>
+      <hr class="modal-divider" />
+      <div class="modal-row"><span class="modal-row-label">Sound</span><span class="modal-row-val" id="m-sound"></span></div>
+      <div class="modal-row"><span class="modal-row-label">Example</span><span class="modal-row-val" id="m-example"></span></div>
+      <div class="modal-row"><span class="modal-row-label">Variant</span><span class="modal-row-val" id="m-variant"></span></div>
+      <div class="modal-row"><span class="modal-row-label">Notes</span><span class="modal-row-val" id="m-notes"></span></div>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script>
+  const letters = [
+    { n:1,  script:"\u0710", name:"Alap",    translit:"A",  sound:'"A" as in Apple',              example:"Apple, Arm",        variant:"None",                         notes:"First letter; carries vowel marks. Represents the 'A' sound.", tags:[] },
+    { n:2,  script:"\u0712", name:"Beth",    translit:"B",  sound:'"B" as in Boy',               example:"Boy",               variant:'Soft: "V/W" sound with dot',   notes:"One of the six letters (BGDKPT) with hard/soft variants.", tags:["variant"] },
+    { n:3,  script:"\u0713", name:"Gamal",   translit:"G",  sound:'"G" as in Girl',              example:"Girl, Garden",      variant:'Soft: "GH" fricative with dot', notes:'Word "Gamal" means camel \u2014 cognate with English.', tags:["variant"] },
+    { n:4,  script:"\u0715", name:"Dalat",   translit:"D",  sound:'"D" as in Dog',               example:"Dog, David",        variant:'Soft: "TH" (that) with dot',   notes:"Does not connect to the following letter within a word.", tags:["variant"] },
+    { n:5,  script:"\u0717", name:"Heh",     translit:"H",  sound:'"H" as in Hello',             example:"Hello",             variant:"None",                         notes:"A light aspirated H sound.", tags:[] },
+    { n:6,  script:"\u0718", name:"Waw",     translit:"W",  sound:'"W" as in Water',             example:"Water",             variant:"Vowel: O (Rwakha), OO (Rwasa)", notes:"Acts as mater lectionis for O and OO vowels.", tags:["variant"] },
+    { n:7,  script:"\u0719", name:"Zayn",    translit:"Z",  sound:'"Z" as in Zebra',             example:"Zebra, Zero",       variant:"None",                         notes:"Identical in sound to English Z.", tags:[] },
+    { n:8,  script:"\u071A", name:"Khet",    translit:"\u1E24",  sound:"Guttural H \u2014 deep throat",    example:"Scottish loch, Bach", variant:"None",                       notes:"Voiceless pharyngeal fricative; no direct English equivalent.", tags:["guttural"] },
+    { n:9,  script:"\u071B", name:"Teth",    translit:"\u1E6C",  sound:"Emphatic / guttural T",       example:"(No English equiv.)", variant:"None",                       notes:"An emphatic T produced further back in the mouth.", tags:["guttural"] },
+    { n:10, script:"\u071D", name:"Yodh",    translit:"Y",  sound:'"Y" as in You',               example:"You, Yes",          variant:"Vowel: EE (Khwasa)",           notes:"Acts as mater lectionis for the EE vowel sound.", tags:["variant"] },
+    { n:11, script:"\u071F", name:"Kap",     translit:"K",  sound:'"K" as in Keep',              example:"Keep, King",        variant:'Soft: "KH" fricative with dot', notes:"One of the six BGDKPT letters with hard/soft distinction.", tags:["variant"] },
+    { n:12, script:"\u0720", name:"Lamadh",  translit:"L",  sound:'"L" as in Love',              example:"Love, Light",       variant:"None",                         notes:"Equivalent to English L.", tags:[] },
+    { n:13, script:"\u0721", name:"Meem",    translit:"M",  sound:'"M" as in Moon',              example:"Moon, Mother",      variant:"None",                         notes:"Equivalent to English M.", tags:[] },
+    { n:14, script:"\u0722", name:"Noon",    translit:"N",  sound:'"N" as in Night',             example:"Night, Name",       variant:"None",                         notes:"Equivalent to English N.", tags:[] },
+    { n:15, script:"\u0723", name:"Simkath", translit:"S",  sound:'"S" as in Sun',               example:"Sun, Sea",          variant:"None",                         notes:"Equivalent to English S.", tags:[] },
+    { n:16, script:"\u0725", name:"Ayn",     translit:"\u02BF",  sound:"Deep voiced pharyngeal",      example:"(No English equiv.)", variant:"None",                       notes:"Often merges with Alap in modern Assyrian speech. A voiced guttural.", tags:["guttural"] },
+    { n:17, script:"\u0726", name:"Peh",     translit:"P",  sound:'"P" as in Pen',               example:"Pen, Park",         variant:'Soft: "F" sound with dot',     notes:"One of the six BGDKPT letters.", tags:["variant"] },
+    { n:18, script:"\u0728", name:"Sadeh",   translit:"\u1E62",  sound:"Emphatic S / TS sound",       example:"(No English equiv.)", variant:"None",                       notes:"An emphatic sibilant, heavier than a regular S.", tags:["guttural"] },
+    { n:19, script:"\u0729", name:"Qop",     translit:"Q",  sound:"Deep guttural Q",             example:"(Deeper than K)",   variant:"None",                         notes:"Uvular stop \u2014 produced at the back of the throat.", tags:["guttural"] },
+    { n:20, script:"\u072A", name:"Resh",    translit:"R",  sound:'"R" as in Run',               example:"Run, River",        variant:"None",                         notes:"Does not connect to following letter within a word.", tags:[] },
+    { n:21, script:"\u072B", name:"Sheen",   translit:"SH", sound:'"SH" as in Ship',             example:"Ship, Shore",       variant:"None",                         notes:"Equivalent to English SH digraph.", tags:[] },
+    { n:22, script:"\u072C", name:"Taw",     translit:"T",  sound:'"T" as in Table',             example:"Table, Time",       variant:'Soft: "TH" (that) with dot',   notes:"Final letter of the alphabet. Has hard (T) and soft (TH) forms.", tags:["variant"] },
+  ];
+
+  const grid = document.getElementById('grid');
+  let activeFilter = 'all';
+  let searchVal = '';
+
+  function renderCards() {
+    document.querySelectorAll('.letter-card').forEach(c => {
+      const name = c.dataset.name.toLowerCase();
+      const tags = c.dataset.tags;
+      const matchFilter = activeFilter === 'all' || tags.includes(activeFilter);
+      const matchSearch = !searchVal || name.includes(searchVal) || c.dataset.translit.toLowerCase().includes(searchVal);
+      c.classList.toggle('hidden', !matchFilter || !matchSearch);
+    });
+  }
+
+  letters.forEach(l => {
+    const card = document.createElement('div');
+    card.className = 'letter-card';
+    card.dataset.name = l.name.toLowerCase();
+    card.dataset.tags = l.tags.join(' ');
+    card.dataset.translit = l.translit.toLowerCase();
+    card.innerHTML = `
+      <div class="card-number">${String(l.n).padStart(2, '0')}</div>
+      <span class="card-script">${l.script}</span>
+      <div class="card-name">${l.name}</div>
+      <div class="card-transliteration">${l.translit}</div>
+      <div class="card-sound">${l.sound}</div>
+      ${l.tags.length ? `<div class="card-tag">${l.tags[0]}</div>` : ''}
+    `;
+    card.addEventListener('click', () => openModal(l));
+    grid.appendChild(card);
+  });
+
+  function openModal(l) {
+    document.getElementById('m-num').textContent = `Letter ${String(l.n).padStart(2, '0')} of 22`;
+    document.getElementById('m-script').textContent = l.script;
+    document.getElementById('m-name').textContent = l.name;
+    document.getElementById('m-translit').textContent = l.translit;
+    document.getElementById('m-sound').textContent = l.sound;
+    document.getElementById('m-example').textContent = l.example;
+    document.getElementById('m-variant').textContent = l.variant;
+    document.getElementById('m-notes').textContent = l.notes;
+    document.getElementById('modal').classList.add('open');
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('modal')) {
+      document.getElementById('modal').classList.remove('open');
+    }
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      renderCards();
+    });
+  });
+
+  document.getElementById('search').addEventListener('input', e => {
+    searchVal = e.target.value.toLowerCase().trim();
+    renderCards();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.getElementById('modal').classList.remove('open');
+  });
+  </script>
+</body>
+</html>
