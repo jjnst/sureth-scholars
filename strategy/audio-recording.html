@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Recording Script — Sureth Scholars (Internal)</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .internal-banner {
+      background: var(--accent-light);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 48px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .script-section {
+      margin-bottom: 40px;
+    }
+
+    .script-section h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .script-section .time-est {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    .script-section p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .script-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      line-height: 2;
+    }
+
+    .script-block .line {
+      display: block;
+      padding: 2px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .script-block .line:last-child {
+      border-bottom: none;
+    }
+
+    .script-block .label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .script-block strong {
+      color: var(--accent);
+    }
+
+    .tips-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 24px 28px;
+      margin-top: 12px;
+    }
+
+    .tips-box li {
+      font-size: 0.88rem;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .tips-box li:last-child {
+      margin-bottom: 0;
+    }
+
+    .tips-box li strong {
+      color: var(--accent);
+    }
+
+    @media (max-width: 640px) {
+      .internal-banner,
+      .section {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../index.html" class="nav-brand">
+      Sureth Scholars
+      <span class="syriac">ܣܘܼܪܲܝܬ</span>
+    </a>
+  </nav>
+
+  <div class="internal-banner">Internal &mdash; For contributors and developers only</div>
+
+  <section class="hero">
+    <p class="eyebrow">Strategy</p>
+    <h1>Audio Recording Script</h1>
+    <p>Script for recording a native Sureth speaker. The recording will be used for AI voice cloning (ElevenLabs) and direct pronunciation clips on the site.</p>
+  </section>
+
+  <div class="stats">
+    <div class="stat-item"><span class="stat-num">~15</span><span class="stat-label">Minutes Total</span></div>
+    <div class="stat-item"><span class="stat-num">6</span><span class="stat-label">Sections</span></div>
+    <div class="stat-item"><span class="stat-num">40+</span><span class="stat-label">Words Covered</span></div>
+    <div class="stat-item"><span class="stat-num">WAV</span><span class="stat-label">Preferred Format</span></div>
+  </div>
+
+  <section class="section">
+
+    <!-- Part 1 -->
+    <div class="script-section">
+      <p class="section-title">Part 1 &mdash; Letter Names &amp; Sounds</p>
+      <div class="time-est">~3 minutes</div>
+      <p>Say the letter name, pause briefly, then say the sound.</p>
+      <div class="script-block">
+        <span class="line"><strong>Alap</strong> &hellip; A</span>
+        <span class="line"><strong>Beth</strong> &hellip; B</span>
+        <span class="line"><strong>Gamal</strong> &hellip; G</span>
+        <span class="line"><strong>Dalat</strong> &hellip; D</span>
+        <span class="line"><strong>Heh</strong> &hellip; H</span>
+        <span class="line"><strong>Waw</strong> &hellip; W</span>
+        <span class="line"><strong>Zayn</strong> &hellip; Z</span>
+        <span class="line"><strong>Khet</strong> &hellip; KH (deep throat)</span>
+        <span class="line"><strong>Teth</strong> &hellip; T (emphatic)</span>
+        <span class="line"><strong>Yodh</strong> &hellip; Y</span>
+        <span class="line"><strong>Kap</strong> &hellip; K</span>
+        <span class="line"><strong>Lamadh</strong> &hellip; L</span>
+        <span class="line"><strong>Meem</strong> &hellip; M</span>
+        <span class="line"><strong>Noon</strong> &hellip; N</span>
+        <span class="line"><strong>Simkath</strong> &hellip; S</span>
+        <span class="line"><strong>Ayn</strong> &hellip; (guttural vowel)</span>
+        <span class="line"><strong>Peh</strong> &hellip; P</span>
+        <span class="line"><strong>Sadeh</strong> &hellip; TS (emphatic)</span>
+        <span class="line"><strong>Qop</strong> &hellip; Q (deep guttural)</span>
+        <span class="line"><strong>Resh</strong> &hellip; R</span>
+        <span class="line"><strong>Sheen</strong> &hellip; SH</span>
+        <span class="line"><strong>Taw</strong> &hellip; T</span>
+      </div>
+    </div>
+
+    <!-- Part 2 -->
+    <div class="script-section">
+      <p class="section-title">Part 2 &mdash; Soft Variants (BGDKPT)</p>
+      <div class="time-est">~1 minute</div>
+      <p>Say the letter name, then the soft sound.</p>
+      <div class="script-block">
+        <span class="line"><strong>Beth</strong> &hellip; V / W (soft)</span>
+        <span class="line"><strong>Gamal</strong> &hellip; GH (soft)</span>
+        <span class="line"><strong>Dalat</strong> &hellip; TH (soft, as in "that")</span>
+        <span class="line"><strong>Kap</strong> &hellip; KH (soft)</span>
+        <span class="line"><strong>Peh</strong> &hellip; F (soft)</span>
+        <span class="line"><strong>Taw</strong> &hellip; TH (soft)</span>
+      </div>
+    </div>
+
+    <!-- Part 3 -->
+    <div class="script-section">
+      <p class="section-title">Part 3 &mdash; Vowels / Zow'e</p>
+      <div class="time-est">~2 minutes</div>
+      <p>Say the vowel name, the sound, then the English comparison.</p>
+      <div class="script-block">
+        <span class="line"><strong>Zqapa</strong> &hellip; AA &hellip; as in "father"</span>
+        <span class="line"><strong>Pthakha</strong> &hellip; UH &hellip; as in "verbal"</span>
+        <span class="line"><strong>Zlama Psheeqa</strong> &hellip; IH &hellip; as in "sit"</span>
+        <span class="line"><strong>Zlama Qashya</strong> &hellip; EH &hellip; as in "bed"</span>
+        <span class="line"><strong>Rwakha</strong> &hellip; OH &hellip; as in "phone"</span>
+        <span class="line"><strong>Rwasa</strong> &hellip; OO &hellip; as in "moon"</span>
+        <span class="line"><strong>Khwasa</strong> &hellip; EE &hellip; as in "bee"</span>
+      </div>
+    </div>
+
+    <!-- Part 4 -->
+    <div class="script-section">
+      <p class="section-title">Part 4 &mdash; Mnemonic Drill with Beth</p>
+      <div class="time-est">~1 minute</div>
+      <p>Read in a steady rhythm.</p>
+      <div class="script-block">
+        <span class="line">Beth Zqapa <strong>BAA</strong></span>
+        <span class="line">Beth Pthakha <strong>BUH</strong></span>
+        <span class="line">Beth Zlama Psheeqa <strong>BI</strong></span>
+        <span class="line">Beth Zlama Qashya <strong>BEH</strong></span>
+        <span class="line">Beth Rwakha <strong>BOH</strong></span>
+        <span class="line">Beth Rwasa <strong>BOO</strong></span>
+        <span class="line">Beth Khwasa <strong>BEE</strong></span>
+      </div>
+    </div>
+
+    <!-- Part 5 -->
+    <div class="script-section">
+      <p class="section-title">Part 5 &mdash; Common Words</p>
+      <div class="time-est">~3 minutes</div>
+      <p>Say each word clearly, twice. Pause between repetitions.</p>
+
+      <div class="script-block">
+        <span class="label">Family</span>
+        <span class="line"><strong>Aaba</strong> (father) &nbsp;&middot;&nbsp; <strong>Yimma</strong> (mother) &nbsp;&middot;&nbsp; <strong>Broona</strong> (son) &nbsp;&middot;&nbsp; <strong>Bratha</strong> (daughter)</span>
+        <span class="line"><strong>Akha</strong> (brother) &nbsp;&middot;&nbsp; <strong>Khatha</strong> (sister) &nbsp;&middot;&nbsp; <strong>Baba</strong> (grandfather) &nbsp;&middot;&nbsp; <strong>Nanna</strong> (grandmother)</span>
+      </div>
+
+      <div class="script-block">
+        <span class="label">Greetings &amp; Phrases</span>
+        <span class="line"><strong>Shlama</strong> (peace / hello)</span>
+        <span class="line"><strong>Shlama alookhon</strong> (hello to you all)</span>
+        <span class="line"><strong>Tawdi</strong> (thank you)</span>
+        <span class="line"><strong>Baseema</strong> (good / pleasant)</span>
+        <span class="line"><strong>Dakhee wet?</strong> (how are you? &mdash; to a male)</span>
+        <span class="line"><strong>Dakhee wat?</strong> (how are you? &mdash; to a female)</span>
+        <span class="line"><strong>Spay</strong> (fine / well)</span>
+        <span class="line"><strong>Belaya</strong> (yes) &nbsp;&middot;&nbsp; <strong>La</strong> (no)</span>
+        <span class="line"><strong>Khosh gelokh</strong> (welcome &mdash; to a male)</span>
+        <span class="line"><strong>Khosh gelakh</strong> (welcome &mdash; to a female)</span>
+      </div>
+
+      <div class="script-block">
+        <span class="label">Everyday Words</span>
+        <span class="line"><strong>Beta</strong> (house) &nbsp;&middot;&nbsp; <strong>Maaya</strong> (water) &nbsp;&middot;&nbsp; <strong>Lakhma</strong> (bread)</span>
+        <span class="line"><strong>Ktaawa</strong> (book) &nbsp;&middot;&nbsp; <strong>Yalpa</strong> (learning) &nbsp;&middot;&nbsp; <strong>Malpana</strong> (teacher)</span>
+        <span class="line"><strong>Lishana</strong> (language) &nbsp;&middot;&nbsp; <strong>Yoma</strong> (day) &nbsp;&middot;&nbsp; <strong>Lilya</strong> (night)</span>
+        <span class="line"><strong>Shimsha</strong> (sun) &nbsp;&middot;&nbsp; <strong>Sahra</strong> (moon)</span>
+      </div>
+
+      <div class="script-block">
+        <span class="label">Numbers 1&ndash;10</span>
+        <span class="line"><strong>Kha</strong> (1) &nbsp;&middot;&nbsp; <strong>Tre</strong> (2) &nbsp;&middot;&nbsp; <strong>Tlatha</strong> (3) &nbsp;&middot;&nbsp; <strong>Arba</strong> (4) &nbsp;&middot;&nbsp; <strong>Khamsha</strong> (5)</span>
+        <span class="line"><strong>Ishta</strong> (6) &nbsp;&middot;&nbsp; <strong>Showa</strong> (7) &nbsp;&middot;&nbsp; <strong>Tmania</strong> (8) &nbsp;&middot;&nbsp; <strong>Tsha</strong> (9) &nbsp;&middot;&nbsp; <strong>Isra</strong> (10)</span>
+      </div>
+
+      <div class="script-block">
+        <span class="label">Colors</span>
+        <span class="line"><strong>Smoqa</strong> (red) &nbsp;&middot;&nbsp; <strong>Yaroqa</strong> (green) &nbsp;&middot;&nbsp; <strong>Zarga</strong> (blue)</span>
+        <span class="line"><strong>Khwara</strong> (white) &nbsp;&middot;&nbsp; <strong>Koma</strong> (black) &nbsp;&middot;&nbsp; <strong>Shaarooqa</strong> (yellow)</span>
+      </div>
+    </div>
+
+    <!-- Part 6 -->
+    <div class="script-section">
+      <p class="section-title">Part 6 &mdash; Natural Speech</p>
+      <div class="time-est">~2 minutes</div>
+      <p>Read these sentences naturally, as if speaking to a friend.</p>
+
+      <div class="script-block">
+        <span class="line"><strong>Shlama, shimi Josh. Ana min Bet Nahrain.</strong></span>
+        <span class="line" style="color: var(--muted); font-style: italic;">(Hello, my name is Josh. I am from Mesopotamia.)</span>
+        <span class="line">&nbsp;</span>
+        <span class="line"><strong>Dakhee wet? Ana spay, tawdi.</strong></span>
+        <span class="line" style="color: var(--muted); font-style: italic;">(How are you? I am fine, thank you.)</span>
+        <span class="line">&nbsp;</span>
+        <span class="line"><strong>Bkhzaya lishana d Sureth khasya baseema.</strong></span>
+        <span class="line" style="color: var(--muted); font-style: italic;">(Learning the Sureth language is very good.)</span>
+        <span class="line">&nbsp;</span>
+        <span class="line"><strong>Aha ktaawa raba baseema.</strong></span>
+        <span class="line" style="color: var(--muted); font-style: italic;">(This book is very good.)</span>
+        <span class="line">&nbsp;</span>
+        <span class="line"><strong>Ana baya yalpinna Sureth.</strong></span>
+        <span class="line" style="color: var(--muted); font-style: italic;">(I want to learn Sureth.)</span>
+      </div>
+
+      <p>Then speak freely for ~30 seconds about anything &mdash; a memory, what you ate today, anything in Sureth. This helps the AI capture natural rhythm and intonation.</p>
+    </div>
+
+    <!-- Recording Tips -->
+    <div class="script-section">
+      <p class="section-title">Recording Tips</p>
+      <div class="tips-box">
+        <ul style="list-style: none; padding: 0;">
+          <li><strong>Pace:</strong> Natural, not too slow. Imagine explaining to a child.</li>
+          <li><strong>Pauses:</strong> Brief pause between each item. Longer pause between sections.</li>
+          <li><strong>Consistency:</strong> Keep the same distance from the mic throughout.</li>
+          <li><strong>Environment:</strong> Quiet room, no echo or background noise.</li>
+          <li><strong>Format:</strong> Save as WAV or M4A. MP3 is okay too.</li>
+          <li><strong>File:</strong> One continuous recording is fine. We can split it later.</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    Sureth Scholars &mdash; Internal contributor documentation
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
