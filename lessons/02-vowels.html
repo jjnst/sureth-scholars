@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2: Vowels &amp; Diacritics — Sureth Scholars</title>
+  <meta name="description" content="Master the 7 vowel marks (Zow'e) of Assyrian Sureth. Learn how diacritical dots transform consonants into vowel sounds.">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* --- Vowel cards --- */
+    .vowel-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 1.5rem;
+    }
+
+    .vowel-card {
+      background: var(--surface);
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 32px;
+      align-items: start;
+      transition: background 0.15s;
+    }
+
+    .vowel-card:hover {
+      background: var(--accent-light);
+    }
+
+    .vowel-display {
+      text-align: center;
+    }
+
+    .vowel-display .syriac-example {
+      font-family: var(--font-syriac);
+      font-size: 3.5rem;
+      color: var(--script);
+      direction: rtl;
+      line-height: 1.3;
+      display: block;
+      transition: color 0.15s;
+    }
+
+    .vowel-card:hover .syriac-example {
+      color: var(--accent);
+    }
+
+    .vowel-display .sound-badge {
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-light);
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 2px;
+      margin-top: 6px;
+    }
+
+    .vowel-info h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .vowel-info .syriac-name {
+      font-family: var(--font-syriac);
+      font-size: 1rem;
+      color: var(--accent);
+      direction: rtl;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .vowel-info .description {
+      font-size: 0.92rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .vowel-info .detail-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 6px;
+      font-size: 0.88rem;
+    }
+
+    .vowel-info .detail-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      min-width: 80px;
+      padding-top: 3px;
+    }
+
+    .vowel-info .detail-val {
+      color: var(--text);
+      flex: 1;
+    }
+
+    /* --- Combination grid --- */
+    .combo-section {
+      margin-top: 48px;
+    }
+
+    .combo-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--border);
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .combo-table th {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 10px 8px;
+      text-align: center;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .combo-table th.syriac-header {
+      font-family: var(--font-syriac);
+      font-size: 1.3rem;
+      letter-spacing: 0;
+      text-transform: none;
+      direction: rtl;
+      color: var(--script);
+    }
+
+    .combo-table td {
+      padding: 10px 8px;
+      text-align: center;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: background 0.15s;
+    }
+
+    .combo-table tr:hover td {
+      background: var(--accent-light);
+    }
+
+    .combo-table .combo-syriac {
+      font-family: var(--font-syriac);
+      font-size: 1.4rem;
+      color: var(--script);
+      direction: rtl;
+    }
+
+    .combo-table .combo-translit {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .combo-table td.letter-cell-combo {
+      background: var(--accent-light);
+      font-family: var(--font-syriac);
+      font-size: 1.3rem;
+      color: var(--accent);
+      direction: rtl;
+      font-weight: 500;
+    }
+
+    /* --- Mnemonic section --- */
+    .mnemonic-section {
+      margin-top: 48px;
+    }
+
+    .mnemonic-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 28px 32px;
+      margin-top: 1rem;
+    }
+
+    .mnemonic-box h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .mnemonic-steps {
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .mnemonic-steps li {
+      counter-increment: step;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    .mnemonic-steps li:last-child {
+      border-bottom: none;
+    }
+
+    .mnemonic-steps li::before {
+      content: counter(step);
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-right: 12px;
+    }
+
+    .mnemonic-example {
+      background: var(--accent-light);
+      padding: 20px 24px;
+      margin-top: 16px;
+      border-radius: 3px;
+    }
+
+    .mnemonic-example .example-text {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .mnemonic-example .syriac-inline {
+      font-family: var(--font-syriac);
+      font-size: 1.2rem;
+      color: var(--accent);
+      direction: rtl;
+    }
+
+    /* --- Intro text --- */
+    .lesson-intro {
+      margin-bottom: 32px;
+      max-width: 650px;
+    }
+
+    .lesson-intro p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    /* --- Lesson nav --- */
+    .lesson-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .lesson-nav .disabled {
+      color: var(--muted);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 640px) {
+      .vowel-card {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 24px;
+      }
+
+      .vowel-display {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .vowel-display .sound-badge {
+        margin-top: 0;
+      }
+
+      .combo-table {
+        font-size: 0.8rem;
+      }
+
+      .combo-table .combo-syriac {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../index.html" class="nav-brand">
+      Sureth Scholars
+      <span class="syriac">ܣܘܼܪܲܝܬ</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="01-alphabet.html">Alphabet</a></li>
+      <li><a href="02-vowels.html" class="active">Vowels</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <p class="eyebrow">Lesson 02</p>
+    <h1>Vowels &amp; Diacritics</h1>
+    <span class="syriac-title">ܙܘܼܥܹ̈ܐ</span>
+    <p>The 7 vowel marks that bring Sureth letters to life. Placing dots above or below a consonant transforms it into a vowel sound.</p>
+  </section>
+
+  <div class="stats">
+    <div class="stat-item"><span class="stat-num">7</span><span class="stat-label">Vowel Marks</span></div>
+    <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Dot Patterns</span></div>
+    <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">Carrier Letters</span></div>
+    <div class="stat-item"><span class="stat-num">85%</span><span class="stat-label">Phonetic Spelling</span></div>
+  </div>
+
+  <section class="section">
+    <div class="lesson-intro">
+      <p>Sureth has 22 consonant letters but no standalone vowel letters. Instead, vowel sounds are created by placing small dots (diacritical marks) above or below consonants. These marks are called <strong>Zow'e</strong> (<span style="font-family: var(--font-syriac); direction: rtl; color: var(--accent);">ܙܘܼܥܹ̈ܐ</span>).</p>
+      <p>The first four vowels are dot patterns placed directly on any consonant. The last three use the carrier letters <strong>Waw</strong> (<span style="font-family: var(--font-syriac); color: var(--accent);">ܘ</span>) and <strong>Yodh</strong> (<span style="font-family: var(--font-syriac); color: var(--accent);">ܝ</span>) with a dot to form their sound.</p>
+      <p>About 85% of Assyrian words are spelled phonetically &mdash; they are spelled as they are pronounced, much like Spanish. Once you learn these 7 marks, reading becomes natural.</p>
+    </div>
+
+    <p class="section-title">The Seven Vowels &mdash; Zow'e &nbsp;(ܙܘܼܥܹ̈ܐ)</p>
+
+    <div class="vowel-grid">
+
+      <!-- 1. Zqapa -->
+      <div class="vowel-card">
+        <div class="vowel-display">
+          <span class="syriac-example">ܒܵ</span>
+          <span class="sound-badge">"AA"</span>
+        </div>
+        <div class="vowel-info">
+          <h3>Zqapa</h3>
+          <span class="syriac-name">ܙܩܵܦܵܐ</span>
+          <p class="description">Two dots placed diagonally above the letter. Produces an open "AA" sound, as in "f<em>a</em>ther" or "c<em>a</em>r."</p>
+          <div class="detail-row"><span class="detail-label">Placement</span><span class="detail-val">Two diagonal dots above the letter</span></div>
+          <div class="detail-row"><span class="detail-label">Sound</span><span class="detail-val">"AA" &mdash; as in "father"</span></div>
+          <div class="detail-row"><span class="detail-label">Example</span><span class="detail-val"><span style="font-family: var(--font-syriac); direction: rtl; color: var(--accent);">ܐܵܒܵܐ</span> (AA-BAA) = father</span></div>
+          <div class="detail-row"><span class="detail-label">Note</span><span class="detail-val">If a word ends with this vowel sound, Alap (ܐ) is always placed at the end of the word</span></div>
+        </div>
+      </div>
+
+      <!-- 2. Pthakha -->
+      <div class="vowel-card">
+        <div class="vowel-display">
+          <span class="syriac-example">ܒܲ</span>
+          <span class="sound-badge">"UH"</span>
+        </div>
+        <div class="vowel-info">
+          <h3>Pthakha</h3>
+          <span class="syriac-name">ܦܬܵܚܵܐ</span>
+          <p class="description">One dot above and one dot below the letter. Produces a short "UH" sound, as in "v<em>e</em>rb" or "b<em>u</em>t."</p>
+          <div class="detail-row"><span class="detail-label">Placement</span><span class="detail-val">One dot above, one dot below the letter</span></div>
+          <div class="detail-row"><span class="detail-label">Sound</span><span class="detail-val">"UH" &mdash; as in "verbal"</span></div>
+          <div class="detail-row"><span class="detail-label">Example</span><span class="detail-val"><span style="font-family: var(--font-syriac); direction: rtl; color: var(--accent);">ܟܬܲܒ݂ܵܐ</span> (KTAA-WAA) = book</span></div>
+          <div class="detail-row"><span class="detail-label">Note</span><span class="detail-val">The most common vowel in everyday Sureth words</span></div>
+        </div>
+      </div>
+
+      <!-- 3. Zlama Psheeqa -->
+      <div class="vowel-card">
+        <div class="vowel-display">
+          <span class="syriac-example">ܒܸ</span>
+          <span class="sound-badge">"IH"</span>
+        </div>
+        <div class="vowel-info">
+          <h3>Zlama Psheeqa</h3>
+          <span class="syriac-name">ܙܠܵܡܵܐ ܦܫܝܼܩܵܐ</span>
+          <p class="description">Two dots placed horizontally below the letter. Produces a short "IH" sound, as in "s<em>i</em>t" or "b<em>i</em>t."</p>
+          <div class="detail-row"><span class="detail-label">Placement</span><span class="detail-val">Two horizontal dots below the letter</span></div>
+          <div class="detail-row"><span class="detail-label">Sound</span><span class="detail-val">"IH" &mdash; as in "sit"</span></div>
+          <div class="detail-row"><span class="detail-label">Example</span><span class="detail-val"><span style="font-family: var(--font-syriac); direction: rtl; color: var(--accent);">ܒܸܣܡܵܐ</span> (BIS-MAA) = pleasant</span></div>
+          <div class="detail-row"><span class="detail-label">Note</span><span class="detail-val">If a word ends with this vowel sound, Alap is placed at the end</span></div>
+        </div>
+      </div>
+
+      <!-- 4. Zlama Qashya -->
+      <div class="vowel-card">
+        <div class="vowel-display">
+          <span class="syriac-example">ܒܹ</span>
+          <span class="sound-badge">"EH"</span>
+        </div>
+        <div class="vowel-info">
+          <h3>Zlama Qashya</h3>
+          <span class="syriac-name">ܙܠܵܡܵܐ ܩܲܫܝܵܐ</span>
+          <p class="description">Two dots placed at an angle below the letter. Produces an "EH" sound, as in "b<em>e</em>d" or "b<em>ea</em>r."</p>
+          <div class="detail-row"><span class="detail-label">Placement</span><span class="detail-val">Two angled dots below the letter</span></div>
+          <div class="detail-row"><span class="detail-label">Sound</span><span class="detail-val">"EH" &mdash; as in "bed"</span></div>
+          <div class="detail-row"><span class="detail-label">Example</span><span class="detail-val"><span style="font-family: var(--font-syriac); direction: rtl; color: var(--accent);">ܒܹܝܬ</span> (BEET) = house</span></div>
+          <div class="detail-row"><span class="detail-label">Note</span><span class="detail-val">If a word ends with this vowel sound, Alap is placed at the end</span></div>
+        </div>
+      </div>
+
+      <!-- 5. Rwakha -->
+      <div class="vowel-card">
+        <div class="vowel-display">
+          <span class="syriac-example">ܘܿ</span>
+          <span class="sound-badge">"OH"</span>
+        </div>
+        <div class="vowel-info">
+          <h3>Rwakha</h3>
+          <span class="syriac-name">ܪܘܵܟ݂ܵܐ</span>
+          <p class="description">A dot placed above the letter Waw (<span style="font-family: var(--font-syriac); color: var(--accent);">ܘ</span>). Produces an "OH" sound, as in "ph<em>o</em>ne" or "g<em>o</em>."</p>
+          <div class="detail-row"><span class="detail-label">Placement</span><span class="detail-val">Dot above the Waw letter (ܘ)</span></div>
+          <div class="detail-row"><span class="detail-label">Sound</span><span class="detail-val">"OH" &mdash; as in "phone"</span></div>
+          <div class="detail-row"><span class="detail-label">Carrier</span><span class="detail-val">Waw (ܘ) &mdash; one of two letters that carry vowels</span></div>
+          <div class="detail-row"><span class="detail-label">Example</span><span class="detail-val"><span style="font-family: var(--font-syriac); direction: rtl; color: var(--accent);">ܕܘܿܪܵܐ</span> (DOH-RAA) = century</span></div>
+        </div>
+      </div>
+
+      <!-- 6. Rwasa -->
+      <div class="vowel-card">
+        <div class="vowel-display">
+          <span class="syriac-example">ܘܼ</span>
+          <span class="sound-badge">"OO"</span>
+        </div>
+        <div class="vowel-info">
+          <h3>Rwasa</h3>
+          <span class="syriac-name">ܪܘܵܣܵܐ</span>
+          <p class="description">A dot placed below the letter Waw (<span style="font-family: var(--font-syriac); color: var(--accent);">ܘ</span>). Produces an "OO" sound, as in "m<em>oo</em>n" or "f<em>oo</em>d."</p>
+          <div class="detail-row"><span class="detail-label">Placement</span><span class="detail-val">Dot below the Waw letter (ܘ)</span></div>
+          <div class="detail-row"><span class="detail-label">Sound</span><span class="detail-val">"OO" &mdash; as in "moon"</span></div>
+          <div class="detail-row"><span class="detail-label">Carrier</span><span class="detail-val">Waw (ܘ) &mdash; same letter, dot below instead of above</span></div>
+          <div class="detail-row"><span class="detail-label">Example</span><span class="detail-val"><span style="font-family: var(--font-syriac); direction: rtl; color: var(--accent);">ܫܘܼܩܵܐ</span> (SHOO-QAA) = market</span></div>
+        </div>
+      </div>
+
+      <!-- 7. Khwasa -->
+      <div class="vowel-card">
+        <div class="vowel-display">
+          <span class="syriac-example">ܝܼ</span>
+          <span class="sound-badge">"EE"</span>
+        </div>
+        <div class="vowel-info">
+          <h3>Khwasa</h3>
+          <span class="syriac-name">ܚܘܵܣܵܐ</span>
+          <p class="description">A dot placed below the letter Yodh (<span style="font-family: var(--font-syriac); color: var(--accent);">ܝ</span>). Produces an "EE" sound, as in "b<em>ee</em>" or "s<em>ee</em>."</p>
+          <div class="detail-row"><span class="detail-label">Placement</span><span class="detail-val">Dot below the Yodh letter (ܝ)</span></div>
+          <div class="detail-row"><span class="detail-label">Sound</span><span class="detail-val">"EE" &mdash; as in "bee"</span></div>
+          <div class="detail-row"><span class="detail-label">Carrier</span><span class="detail-val">Yodh (ܝ) &mdash; the third carrier letter for vowels</span></div>
+          <div class="detail-row"><span class="detail-label">Example</span><span class="detail-val"><span style="font-family: var(--font-syriac); direction: rtl; color: var(--accent);">ܒܹܝܬ</span> (BEET) = house</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Combination table -->
+    <div class="combo-section">
+      <p class="section-title">Vowels on Consonants &mdash; Quick Reference</p>
+      <p style="font-size: 0.9rem; color: var(--muted); font-style: italic; margin-bottom: 8px;">How each vowel mark looks when applied to the first few letters of the alphabet.</p>
+
+      <div style="overflow-x: auto;">
+        <table class="combo-table">
+          <thead>
+            <tr>
+              <th>Letter</th>
+              <th>Zqapa<br>"AA"</th>
+              <th>Pthakha<br>"UH"</th>
+              <th>Zlama P.<br>"IH"</th>
+              <th>Zlama Q.<br>"EH"</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="letter-cell-combo">ܐ</td>
+              <td><span class="combo-syriac">ܐܵ</span><span class="combo-translit">AA</span></td>
+              <td><span class="combo-syriac">ܐܲ</span><span class="combo-translit">UH</span></td>
+              <td><span class="combo-syriac">ܐܸ</span><span class="combo-translit">IH</span></td>
+              <td><span class="combo-syriac">ܐܹ</span><span class="combo-translit">EH</span></td>
+            </tr>
+            <tr>
+              <td class="letter-cell-combo">ܒ</td>
+              <td><span class="combo-syriac">ܒܵ</span><span class="combo-translit">BAA</span></td>
+              <td><span class="combo-syriac">ܒܲ</span><span class="combo-translit">BUH</span></td>
+              <td><span class="combo-syriac">ܒܸ</span><span class="combo-translit">BI</span></td>
+              <td><span class="combo-syriac">ܒܹ</span><span class="combo-translit">BEH</span></td>
+            </tr>
+            <tr>
+              <td class="letter-cell-combo">ܓ</td>
+              <td><span class="combo-syriac">ܓܵ</span><span class="combo-translit">GAA</span></td>
+              <td><span class="combo-syriac">ܓܲ</span><span class="combo-translit">GUH</span></td>
+              <td><span class="combo-syriac">ܓܸ</span><span class="combo-translit">GI</span></td>
+              <td><span class="combo-syriac">ܓܹ</span><span class="combo-translit">GEH</span></td>
+            </tr>
+            <tr>
+              <td class="letter-cell-combo">ܕ</td>
+              <td><span class="combo-syriac">ܕܵ</span><span class="combo-translit">DAA</span></td>
+              <td><span class="combo-syriac">ܕܲ</span><span class="combo-translit">DUH</span></td>
+              <td><span class="combo-syriac">ܕܸ</span><span class="combo-translit">DI</span></td>
+              <td><span class="combo-syriac">ܕܹ</span><span class="combo-translit">DEH</span></td>
+            </tr>
+            <tr>
+              <td class="letter-cell-combo">ܡ</td>
+              <td><span class="combo-syriac">ܡܵ</span><span class="combo-translit">MAA</span></td>
+              <td><span class="combo-syriac">ܡܲ</span><span class="combo-translit">MUH</span></td>
+              <td><span class="combo-syriac">ܡܸ</span><span class="combo-translit">MI</span></td>
+              <td><span class="combo-syriac">ܡܹ</span><span class="combo-translit">MEH</span></td>
+            </tr>
+            <tr>
+              <td class="letter-cell-combo">ܫ</td>
+              <td><span class="combo-syriac">ܫܵ</span><span class="combo-translit">SHAA</span></td>
+              <td><span class="combo-syriac">ܫܲ</span><span class="combo-translit">SHUH</span></td>
+              <td><span class="combo-syriac">ܫܸ</span><span class="combo-translit">SHI</span></td>
+              <td><span class="combo-syriac">ܫܹ</span><span class="combo-translit">SHEH</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Mnemonic section -->
+    <div class="mnemonic-section">
+      <p class="section-title">How to Practice &mdash; The Mnemonic Method</p>
+      <div class="mnemonic-box">
+        <h3>Traditional Learning Method</h3>
+        <p style="font-size: 0.9rem; color: var(--muted); font-style: italic; margin-bottom: 16px;">This is the method used back home to memorize the vowels. Go through each letter of the alphabet, applying each vowel in order.</p>
+        <ol class="mnemonic-steps">
+          <li>Name the letter (A-TOO-TAA)</li>
+          <li>Name the vowel mark</li>
+          <li>Pronounce the consonant with the vowel</li>
+          <li>Move to the next letter and repeat</li>
+        </ol>
+        <div class="mnemonic-example">
+          <p class="example-text">
+            <strong>Example with Beth (</strong><span class="syriac-inline">ܒ</span><strong>):</strong><br>
+            "Beth &mdash; Zqapa &mdash; <strong>BAA</strong>" &nbsp;
+            <span class="syriac-inline">ܒܵ</span><br>
+            "Beth &mdash; Pthakha &mdash; <strong>BUH</strong>" &nbsp;
+            <span class="syriac-inline">ܒܲ</span><br>
+            "Beth &mdash; Zlama Psheeqa &mdash; <strong>BI</strong>" &nbsp;
+            <span class="syriac-inline">ܒܸ</span><br>
+            "Beth &mdash; Zlama Qashya &mdash; <strong>BEH</strong>" &nbsp;
+            <span class="syriac-inline">ܒܹ</span><br>
+            "Beth &mdash; Rwakha &mdash; <strong>BOH</strong>" &nbsp;
+            <span class="syriac-inline">ܒܘܿ</span><br>
+            "Beth &mdash; Rwasa &mdash; <strong>BOO</strong>" &nbsp;
+            <span class="syriac-inline">ܒܘܼ</span><br>
+            "Beth &mdash; Khwasa &mdash; <strong>BEE</strong>" &nbsp;
+            <span class="syriac-inline">ܒܝܼ</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key rules -->
+    <div class="combo-section">
+      <p class="section-title">Key Rules to Remember</p>
+      <div class="mnemonic-box">
+        <div class="detail-row" style="margin-bottom: 14px;">
+          <span class="detail-label" style="min-width: 100px;">Alap Rule</span>
+          <span class="detail-val">If a word ends with the Zqapa ("AA"), Zlama Psheeqa ("IH"), or Zlama Qashya ("EH") vowel sound, an Alap (<span style="font-family: var(--font-syriac); color: var(--accent);">ܐ</span>) is always placed at the end of the word &mdash; similar to the silent "e" in English words like "spike."</span>
+        </div>
+        <div class="detail-row" style="margin-bottom: 14px;">
+          <span class="detail-label" style="min-width: 100px;">Two Carriers</span>
+          <span class="detail-val">Waw (<span style="font-family: var(--font-syriac); color: var(--accent);">ܘ</span>) carries the O sounds (Rwakha and Rwasa). Yodh (<span style="font-family: var(--font-syriac); color: var(--accent);">ܝ</span>) carries the EE sound (Khwasa). These letters act as "mater lectionis" &mdash; mothers of reading.</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label" style="min-width: 100px;">Phonetic</span>
+          <span class="detail-val">About 85% of Sureth words are spelled exactly as they sound. Once you learn the vowel marks, you can sound out most words correctly on sight.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="01-alphabet.html">&larr; Previous: The Alphabet</a>
+      <span class="disabled">Next: Greetings &amp; Basics &rarr;</span>
+    </div>
+  </section>
+
+  <footer class="footer">
+    Sureth Scholars &mdash; Preserving and teaching Assyrian Sureth (Neo-Aramaic)
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
